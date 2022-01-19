@@ -262,6 +262,18 @@
             }
         }
 
+        public function get_idproof_user($id){
+            $core = Core::getInstance();
+            $query = "select * from id_table where user_id=$id";
+            $stmt = $core->dbh->prepare( $query );
+            if ( !$stmt->execute() ) {
+                $err = $stmt->errorInfo();
+                die( $err[2] );
+            }else{
+                return $stmt->fetch();
+            }
+        }
+
         public function get_user(){
             $core = Core::getInstance();
             $sql = "SELECT * from user_table where user_role=1";
